@@ -31,16 +31,16 @@ Vector Vector::operator-(const Vector& v) const
 
 Vector& Vector::operator+=(const Vector& v)
 {
-	x+=v.x; 
-	y+=v.y; 
-	z+=v.z;
+	x += v.x; 
+	y += v.y; 
+	z += v.z;
 	return (*this);
 }
 Vector& Vector::operator-=(const Vector& v)
 {
-	x-=v.x; 
-	y-=v.y; 
-	z-=v.z;
+	x -= v.x; 
+	y -= v.y; 
+	z -= v.z;
 	return (*this);
 }
 
