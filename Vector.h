@@ -10,6 +10,8 @@ public:
 	Vector(float x, float y, float z);
 	~Vector(void);
 
+	float lenght();
+
 	Vector operator+(const Vector& v) const;
 	Vector operator-(const Vector& v) const;
 	

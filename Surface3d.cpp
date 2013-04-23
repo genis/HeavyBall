@@ -110,7 +110,7 @@ void Surface3d::generateMesh(Surface& S)
 
 	unsigned int indicesStride = 0;
 
-	for (int i = 0; i < n-2; ++i) {
+	for (int i = 0; i < n-1; ++i) {
 		for (int j = 0; j < m; ++j) {
 			indices[indicesStride++] = i*m + j;
 			indices[indicesStride++] = (i+1)*m + j;
