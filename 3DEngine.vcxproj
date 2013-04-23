@@ -85,6 +85,7 @@
     <ClInclude Include="corona.h" />
     <ClInclude Include="cScene.h" />
     <ClInclude Include="cTexture.h" />
+    <ClInclude Include="FisicEngine.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Shader.h" />
@@ -97,6 +98,7 @@
     <ClCompile Include="cGame.cpp" />
     <ClCompile Include="cScene.cpp" />
     <ClCompile Include="cTexture.cpp" />
+    <ClCompile Include="FisicEngine.cpp" />
     <ClCompile Include="GLUTMain.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Surface.cpp" />
