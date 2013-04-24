@@ -14,18 +14,20 @@ void Surface3d::getSmoothNormals(Surface& S, vector<Vector>& smoothNormals)
 {
 	int n = S.getHeight();
 	int m = S.getWidth();
+	
+	smoothNormals = vector<Vector>(n*m);
 
 	for (int i = 0; i < n-1; ++i) {
 		for (int j = 0; j < m-1; ++j) {
 			smoothNormals[i*m + j] += surface[i][j].normal; 
 		}
 		//add the current row last vertex normal
-		smoothNormals[i*m + m-1] += surface[i][m-1].normal;
+		smoothNormals[i*m + m-1] += surface[i][m-2].normal;
 	}
 	//add last row
-	for (int i = 0; i < m-1; ++i) smoothNormals[(n-1)*m + i] += surface[n-1][i].normal;
+	for (int i = 0; i < m-1; ++i) smoothNormals[(n-1)*m + i] += surface[n-2][i].normal;
 	//add last row last vertex normal
-	smoothNormals[n-1*m + m-1] += surface[n-1][m-1].normal;
+	smoothNormals[n-1*m + m-1] += surface[n-2][m-2].normal;
 
 	for (int i = 0; i < smoothNormals.size(); ++i) smoothNormals[i].normalize();
 }
@@ -74,15 +76,15 @@ void Surface3d::generateMesh(Surface& S)
 	vector<Vector> smoothNormals;
 	getSmoothNormals(S, smoothNormals);
 
-	GLfloat* vertices = new GLfloat[n*m];
-	GLfloat* normals = new GLfloat[n*m];
+	GLfloat* vertices = new GLfloat[n*m*3];
+	GLfloat* normals = new GLfloat[n*m*3];
 
 	unsigned int verticesStride = 0;
 	for (int i = 0; i < n; ++i) {
 		for (int j = 0; j < m; ++j) {
 			vertices[verticesStride + 0] = GLfloat(j);
-			vertices[verticesStride + 1] = GLfloat(i);
-			vertices[verticesStride + 2] = GLfloat(S.getZ(j, i));
+			vertices[verticesStride + 1] = GLfloat(S.getZ(j, i));
+			vertices[verticesStride + 2] = GLfloat(i);
 
 			normals[verticesStride + 0] = smoothNormals[i*m + j].x; 
 			normals[verticesStride + 1] = smoothNormals[i*m + j].y;
@@ -118,7 +120,7 @@ void Surface3d::generateMesh(Surface& S)
 
 		++i;
 		if (i < n-1) {
-			for (int j = m-1; j >= 0; ++j) {
+			for (int j = m-1; j >= 0; --j) {
 				indices[indicesStride++] = i*m + j;
 				indices[indicesStride++] = (i+1)*m + j;
 			}

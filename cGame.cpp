@@ -13,7 +13,7 @@ bool cGame::Init()
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(45.0,(float)SCREEN_WIDTH/(float)SCREEN_HEIGHT,0.1,100);
+	gluPerspective(45.0,(float)SCREEN_WIDTH/(float)SCREEN_HEIGHT,0.1,2000);
 	glMatrixMode(GL_MODELVIEW);
 	
 	glEnable(GL_DEPTH_TEST);
@@ -27,6 +27,8 @@ bool cGame::Init()
 	if(!res) return false;
 	res = Data.LoadImage(IMG_ROOF,"roof.png",GL_RGBA);
 	if(!res) return false;
+	glewInit();
+	res = Scene.Init();
 
 	return res;
 }
@@ -75,9 +77,8 @@ void cGame::Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	
-	glTranslatef(0.0f,-2.0f,-40.0f);
-	glRotatef(20,1.0f,0.0f,0.0f);
 
+	Scene.setCam();
 	Scene.Draw(&Data);
 
 	glutSwapBuffers();
