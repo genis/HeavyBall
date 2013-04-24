@@ -12,10 +12,10 @@ public:
 	FisicEngine(void);
 	~FisicEngine(void);
 
-	Vector acceleracio(Vector grad);
+	Vector acceleracio(Vector grad, Vector normal);
 	
 private:
-	float getAngle(Vector grad);
+	float getAngle(Vector grad, Vector normal);
 
 };
 
