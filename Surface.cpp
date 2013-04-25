@@ -50,7 +50,6 @@ void Surface::perlinNoise(float amplitude, int frequency, unsigned int seed)
 	int m = height/frequency + 2;
 	vector<vector<vec2> > grid(m, vector<vec2>(n));
 
-	//srand(123);
 	//using random
 	//default_random_engine generator(seed);
 	//uniform_real_distribution<double> distribution(-1.0, 1.0);
