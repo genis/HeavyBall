@@ -69,14 +69,14 @@ bool cGame::Process()
 	//Process Input
 	if(keys[27])	res=false;	
 	
-	if (keys['q']) Scene.moveCam(-1.0f, 0.0f, 0.0f);
-	else if (keys['s']) Scene.moveCam(0.0f, 0.0f, 1.0f);
-	else if (keys['w']) Scene.moveCam(0.0f, 0.0f, -1.0f);
-	else if (keys['e']) Scene.moveCam(1.0f, 0.0f, 0.0f);
+	if (keys['q']) Scene.moveCam(0.0f, 0.0f, 1.0f);
+	else if (keys['e']) Scene.moveCam(0.0f, 0.0f, -1.0f);
 
 	if (keys['a']) Scene.rotateCam(0.0f, -1.0f, 0.0f);
 	else if (keys['d']) Scene.rotateCam(0.0f, 1.0f, 0.0f);
-
+	else if (keys['s']) Scene.rotateCam(1.0f, 0.0f, 1.0f);
+	else if (keys['w']) Scene.rotateCam(-1.0f, 0.0f, -1.0f);
+	
 	return res;
 }
 
