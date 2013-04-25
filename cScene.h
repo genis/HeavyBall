@@ -9,11 +9,14 @@ class cScene
 private:
 	static const int SCENE_WIDTH = 100;
 	static const int SCENE_DEPTH = 100;
-	static const int SCENE_HEIGHT = 20;
+	static const int SCENE_HEIGHT = 10;
 
 	Surface3d surface;
 
+	Shader lightingShader;
+
 	Point sun;
+
 
 public:
 	cScene(void);

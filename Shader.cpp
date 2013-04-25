@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 Shader::Shader(void)
 {
@@ -17,27 +18,23 @@ void Shader::readShaderSourceFile(const char* file, string& source)
     source = shaderData.str();
 }
 
-void Shader::printLog(GLuint obj)
+void Shader::printLog(void)
 {
     int infologLength = 0;
     int maxLength;
+	
+	glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &maxLength);
     
-    if(glIsShader(obj)) glGetShaderiv(obj, GL_INFO_LOG_LENGTH, &maxLength);
-	else glGetProgramiv(obj, GL_INFO_LOG_LENGTH, &maxLength);
+	char infoLog[1000];
     
-	char* infoLog = new char[maxLength];
-    
-    if (glIsShader(obj)) glGetShaderInfoLog(obj, maxLength, &infologLength, infoLog);
-    else glGetProgramInfoLog(obj, maxLength, &infologLength, infoLog);
+    glGetProgramInfoLog(programID, maxLength, &infologLength, infoLog);
     
     if (infologLength > 0) printf("%s\n",infoLog);
-	
-	delete infoLog;
 }
 
 Shader::Shader(const char* vertexFile, const char* geometryFile,  const char* fragmentFile) 
 {
-    GLuint programID = glCreateProgram();
+    programID = glCreateProgram();
 
     if (vertexFile != NULL) {
         string vertexSource;

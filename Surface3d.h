@@ -4,6 +4,7 @@
 #include <vector>
 #include "Surface.h"
 #include "Vector.h"
+#include "Shader.h"
 
 class Surface3d
 {

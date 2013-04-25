@@ -17,6 +17,10 @@ bool cGame::Init()
 	glMatrixMode(GL_MODELVIEW);
 	
 	glEnable(GL_DEPTH_TEST);
+	
+	glEnable(GL_LIGHTING); 
+    glEnable(GL_LIGHT0);
+
 	glAlphaFunc(GL_GREATER, 0.05f);
 	glEnable(GL_ALPHA_TEST);
 

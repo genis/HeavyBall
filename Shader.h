@@ -15,7 +15,7 @@ public:
 	Shader(const char* vertexShader, const char* geometryShader, const char* fragmentShader);
 	~Shader(void);
 	
-	void printLog(GLuint); 
+	void printLog(void); 
 
 	void enable(void);
 	void disable(void);
