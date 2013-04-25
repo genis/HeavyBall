@@ -74,8 +74,8 @@ bool cGame::Process()
 
 	if (keys['a']) Scene.rotateCam(0.0f, -1.0f, 0.0f);
 	else if (keys['d']) Scene.rotateCam(0.0f, 1.0f, 0.0f);
-	else if (keys['s']) Scene.rotateCam(1.0f, 0.0f, 1.0f);
-	else if (keys['w']) Scene.rotateCam(-1.0f, 0.0f, -1.0f);
+	else if (keys['s']) Scene.rotateCam(1.0f, 0.0f, 0.0f);
+	else if (keys['w']) Scene.rotateCam(-1.0f, 0.0f, 0.0f);
 	
 	return res;
 }

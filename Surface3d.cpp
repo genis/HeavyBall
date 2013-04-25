@@ -27,7 +27,7 @@ void Surface3d::getSmoothNormals(Surface& S, vector<Vector>& smoothNormals)
 	//add last row
 	for (int i = 0; i < m-1; ++i) smoothNormals[(n-1)*m + i] += surface[n-2][i].normal;
 	//add last row last vertex normal
-	smoothNormals[n-1*m + m-1] += surface[n-2][m-2].normal;
+	smoothNormals[(n-1)*m + m-1] += surface[n-2][m-2].normal;
 
 	for (int i = 0; i < smoothNormals.size(); ++i) smoothNormals[i].normalize();
 }

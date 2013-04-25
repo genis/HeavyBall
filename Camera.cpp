@@ -27,9 +27,11 @@ void Camera::setUp(void) const
 {
 	glTranslatef(p.x, p.y, p.z);
 
-	glRotatef(psi, 0.0f, 0.0f, 1.0f);
-	glRotatef(theta, 0.0f, 1.0f, 0.0f);
+	glRotatef(-theta, 0.0f, 1.0f, 0.0f);
 	glRotatef(phi, 1.0f, 0.0f, 0.0f);
+	glRotatef(-psi, 0.0f, 0.0f, 1.0f);
+	
+	
 
 	glTranslatef(-vrp.x, -vrp.y, -vrp.z);
 }
