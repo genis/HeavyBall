@@ -10,7 +10,7 @@ bool cGame::Init()
 	bool res=true;
 
 	//Graphics initialization
-	glClearColor(0.0f,0.0f,0.0f,0.0f);
+	glClearColor(0.4f,0.6f,1.0f,0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(45.0,(float)SCREEN_WIDTH/(float)SCREEN_HEIGHT,0.1,2000);
@@ -69,8 +69,13 @@ bool cGame::Process()
 	//Process Input
 	if(keys[27])	res=false;	
 	
-	//Game Logic
-	//...
+	if (keys['q']) Scene.moveCam(-1.0f, 0.0f, 0.0f);
+	else if (keys['s']) Scene.moveCam(0.0f, 0.0f, 1.0f);
+	else if (keys['w']) Scene.moveCam(0.0f, 0.0f, -1.0f);
+	else if (keys['e']) Scene.moveCam(1.0f, 0.0f, 0.0f);
+
+	if (keys['a']) Scene.rotateCam(0.0f, -1.0f, 0.0f);
+	else if (keys['d']) Scene.rotateCam(0.0f, 1.0f, 0.0f);
 
 	return res;
 }
