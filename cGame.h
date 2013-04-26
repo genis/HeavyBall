@@ -2,6 +2,7 @@
 
 #include "cScene.h"
 #include "cData.h"
+#include "Player.h"
 
 #define SCREEN_WIDTH	800
 #define SCREEN_HEIGHT	600
@@ -28,4 +29,5 @@ private:
 	unsigned char keys[256];
 	cScene Scene;
 	cData Data;
+	Player player;
 };

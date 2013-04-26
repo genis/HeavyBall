@@ -88,6 +88,7 @@
     <ClInclude Include="cTexture.h" />
     <ClInclude Include="FisicEngine.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Surface.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="cTexture.cpp" />
     <ClCompile Include="FisicEngine.cpp" />
     <ClCompile Include="GLUTMain.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="Surface3d.cpp" />

@@ -33,7 +33,7 @@ bool cGame::Init()
 	if(!res) return false;
 	glewInit();
 	res = Scene.Init();
-
+	
 	return res;
 }
 
@@ -72,11 +72,13 @@ bool cGame::Process()
 	if (keys['q']) Scene.moveCam(0.0f, 0.0f, 1.0f);
 	else if (keys['e']) Scene.moveCam(0.0f, 0.0f, -1.0f);
 
-	if (keys['a']) Scene.rotateCam(0.0f, -1.0f, 0.0f);
-	else if (keys['d']) Scene.rotateCam(0.0f, 1.0f, 0.0f);
-	else if (keys['s']) Scene.rotateCam(1.0f, 0.0f, 0.0f);
-	else if (keys['w']) Scene.rotateCam(-1.0f, 0.0f, 0.0f);
+	if (keys['j']) Scene.rotateCam(0.0f, -1.0f, 0.0f);
+	else if (keys['l']) Scene.rotateCam(0.0f, 1.0f, 0.0f);
+	else if (keys['k']) Scene.rotateCam(1.0f, 0.0f, 0.0f);
+	else if (keys['i']) Scene.rotateCam(-1.0f, 0.0f, 0.0f);
 	
+	//if (keys['a'] || keys['d'] || keys['s'] || keys['w']) player.mou(keys);
+
 	return res;
 }
 
@@ -86,6 +88,7 @@ void cGame::Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	
+	player.render(&Data);
 
 	Scene.setCam();
 	Scene.Draw(&Data);
