@@ -13,10 +13,13 @@ public:
 	float lenght();
 
 	Vector operator+(const Vector& v) const;
-	Vector operator-(const Vector& v) const;
-	
 	Vector& operator+=(const Vector& v);
+
+	Vector operator-(const Vector& v) const;
 	Vector& operator-=(const Vector& v);
+
+	Vector operator*(float s) const;
+	Vector& operator*=(float s);
 
 	void normalize();
 

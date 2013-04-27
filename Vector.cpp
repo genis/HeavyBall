@@ -29,11 +29,6 @@ Vector Vector::operator+(const Vector& v) const
 	return Vector(x+v.x, y+v.y, z+v.z);
 }
 
-Vector Vector::operator-(const Vector& v) const
-{
-	return Vector(x-v.x, y-v.y, z-v.z);
-}
-
 Vector& Vector::operator+=(const Vector& v)
 {
 	x += v.x; 
@@ -42,11 +37,32 @@ Vector& Vector::operator+=(const Vector& v)
 
 	return (*this);
 }
+
+Vector Vector::operator-(const Vector& v) const
+{
+	return Vector(x-v.x, y-v.y, z-v.z);
+}
+
 Vector& Vector::operator-=(const Vector& v)
 {
 	x -= v.x; 
 	y -= v.y; 
 	z -= v.z;
+
+	return (*this);
+}
+
+
+Vector Vector::operator*(float s) const
+{
+	return Vector(x*s, y*s, z*s);
+}
+
+Vector& Vector::operator*=(float s)
+{
+	x *= s; 
+	y *= s; 
+	z *= s;
 
 	return (*this);
 }

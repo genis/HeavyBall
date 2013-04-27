@@ -12,7 +12,7 @@ cScene::~cScene(void)
 
 bool cScene::Init()
 {
-	surface.generate(SCENE_WIDTH, SCENE_DEPTH, SCENE_HEIGHT, SCENE_WIDTH/10,time(0));
+	surface.generate(SCENE_WIDTH, SCENE_DEPTH, SCENE_HEIGHT, SCENE_WIDTH/6,time(0));
 	lightingShader = Shader("./shaders/fragmentLighting.vert", NULL, "./shaders/fragmentLighting.frag");
 	lightingShader.printLog();
 	return true;
