@@ -31,11 +31,15 @@ float Surface3d::getHeight(float x, float y)
 	int j = x;
 	int i = y;
 	
-	//check
-	return (x*surface[i][j].grad.x + y*surface[i][j].grad.y);
+	//plane equation: z = a*x + b*y + c 
+	float a = surface[i][j].grad.x;
+	float b = surface[i][j].grad.y;
+	float c = surface[i][j].height;
+
+	return (a*x + b*y + c);
 }
 
-void Surface3d::setNormalsAndGradients(const Surface& S)
+void Surface3d::setGeometricPropierties(const Surface& S)
 {
 	int n = S.getHeight();
 	int m = S.getWidth();
@@ -59,6 +63,9 @@ void Surface3d::setNormalsAndGradients(const Surface& S)
 			surface[i][j].grad = Vector(min(p1.y, p2.y) - max(p1.y, p2.y), 
 										min(p1.y, p3.y) - max(p1.y, p3.y), 
 										0.0f);
+
+			surface[i][j].height = max(max(S.getZ(j, i), S.getZ(j+1, i)), 
+									   max(S.getZ(j, i+1), S.getZ(j+1, i+1)));
 		}
 	}
 }
@@ -161,7 +168,7 @@ void Surface3d::generate(int width, int depth, float amplitude, int frequency, u
 	Surface S(depth+1, width+1);
 	S.perlinNoise(amplitude, frequency, seed);
 
-	setNormalsAndGradients(S);
+	setGeometricPropierties(S);
 	generateMesh(S);
 }
 

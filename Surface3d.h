@@ -28,7 +28,7 @@ private:
 
 	void getSmoothNormals(const Surface& S, vector<Vector>& smoothNormals);
 
-	void setNormalsAndGradients(const Surface& S);
+	void setGeometricPropierties(const Surface& S);
 
 	void generateMesh(const Surface& S);
 
