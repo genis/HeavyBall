@@ -26,7 +26,7 @@ private:
 
 	GLuint indicesCount;
 
-	void getSmoothNormals(const Surface& S, vector<Vector>& smoothNormals);
+	void getSmoothNormals(vector<Vector>& smoothNormals);
 
 	void setGeometricPropierties(const Surface& S);
 
@@ -39,7 +39,7 @@ public:
 	Vector getGradient(float x, float y);
 	Vector getNormal(float x, float y);
 	float getHeight(float x, float y);
-
+	float getMu(float x, float y);
 
 	void generate(int width, int depth, float amplitude, int frequency, unsigned int seed);
 	void draw(void);
