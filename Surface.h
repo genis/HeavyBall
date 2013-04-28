@@ -28,9 +28,9 @@ public:
 	~Surface(void);
 
 	void perlinNoise(float amplitude, int frequency, unsigned int seed);
-	double getZ(int x, int y);
+	double getZ(int x, int y) const;
 
-	int getHeight(void);
-	int getWidth(void);
+	int getHeight(void) const;
+	int getWidth(void) const;
 };
 

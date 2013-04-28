@@ -26,16 +26,20 @@ private:
 
 	GLuint indicesCount;
 
-	void getSmoothNormals(Surface& S, vector<Vector>& smoothNormals);
+	void getSmoothNormals(const Surface& S, vector<Vector>& smoothNormals);
 
-	void setNormals(Surface& S);
-	void setGradient(Surface& S);
+	void setNormalsAndGradients(const Surface& S);
 
-	void generateMesh(Surface& S);
+	void generateMesh(const Surface& S);
 
 public:
 	Surface3d(void);
 	~Surface3d(void);
+
+	Vector getGradient(float x, float y);
+	Vector getNormal(float x, float y);
+	float getHeight(float x, float y);
+
 
 	void generate(int width, int depth, float amplitude, int frequency, unsigned int seed);
 	void draw(void);

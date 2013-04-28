@@ -15,17 +15,17 @@ Surface::~Surface(void)
 {
 }
 
-int Surface::getHeight(void)
+int Surface::getHeight(void) const
 {
 	return height;
 }
 
-int Surface::getWidth(void)
+int Surface::getWidth(void) const
 {
 	return width;
 }
 
-double Surface::getZ(int x, int y) 
+double Surface::getZ(int x, int y) const
 {
 	assert(x >= 0 || x < width || y >= 0 || y < height);
 	return surface[y][x];
@@ -35,9 +35,8 @@ double Surface::dRand(double min, double max) {
 	double r = rand();
 	double rmax = RAND_MAX;
 	double f = r / rmax;
-	
-	double res = min + f * (max - min);
-	return res;
+
+	return (min + f * (max - min));
 }
 
 void Surface::perlinNoise(float amplitude, int frequency, unsigned int seed)

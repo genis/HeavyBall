@@ -10,7 +10,60 @@ Surface3d::~Surface3d(void)
 {
 }
 
-void Surface3d::getSmoothNormals(Surface& S, vector<Vector>& smoothNormals) 
+Vector Surface3d::getGradient(float x, float y)
+{
+	int j = x;
+	int i = y;
+
+	return surface[i][j].grad;
+}
+
+Vector Surface3d::getNormal(float x, float y)
+{
+	int j = x;
+	int i = y;
+
+	return surface[i][j].normal;
+}
+
+float Surface3d::getHeight(float x, float y)
+{
+	int j = x;
+	int i = y;
+	
+	//check
+	return (x*surface[i][j].grad.x + y*surface[i][j].grad.y);
+}
+
+void Surface3d::setNormalsAndGradients(const Surface& S)
+{
+	int n = S.getHeight();
+	int m = S.getWidth();
+
+	for (int i = 0; i < n-1; ++i) {
+		for (int j = 0; j < m-1; ++j) {
+			Point p1(j, S.getZ(j, i), i);
+			Point p2(j+1, S.getZ(j+1, i), i);
+			Point p3(j, S.getZ(j, i+1), i+1);
+
+			Vector v1 = p2 - p1;
+			Vector v2 = p3 - p1;
+
+			//normals should face up
+			Vector n = v2.crossProd(v1);
+			n.normalize();
+
+			surface[i][j].normal = n;
+
+			//gradients point downhill
+			surface[i][j].grad = Vector(min(p1.y, p2.y) - max(p1.y, p2.y), 
+										min(p1.y, p3.y) - max(p1.y, p3.y), 
+										0.0f);
+		}
+	}
+}
+
+void Surface3d::getSmoothNormals(const Surface& S, vector<Vector>& smoothNormals) 
 {
 	int n = S.getHeight();
 	int m = S.getWidth();
@@ -32,42 +85,7 @@ void Surface3d::getSmoothNormals(Surface& S, vector<Vector>& smoothNormals)
 	for (int i = 0; i < smoothNormals.size(); ++i) smoothNormals[i].normalize();
 }
 
-void Surface3d::setNormals(Surface& S)
-{
-	int n = S.getHeight();
-	int m = S.getWidth();
-
-	for (int i = 0; i < n-1; ++i) {
-		for (int j = 0; j < m-1; ++j) {
-			Point p1(j, S.getZ(j, i), i);
-			Point p2(j+1, S.getZ(j+1, i), i);
-			Point p3(j, S.getZ(j, i+1), i+1);
-
-			Vector v1 = p2 - p1;
-			Vector v2 = p3 - p1;
-
-			//normals should face up
-			Vector n = v2.crossProd(v1);
-			n.normalize();
-
-			surface[i][j].normal = n;
-		}
-	}
-}
-
-void Surface3d::setGradient(Surface& S)
-{
-	int n = S.getHeight();
-	int m = S.getWidth();
-
-	for (int i = 0; i < n-1; ++i) {
-		for (int j = 0; j < m-1; ++j) {
-		//TODO
-		}
-	}
-}
-
-void Surface3d::generateMesh(Surface& S)
+void Surface3d::generateMesh(const Surface& S)
 {
 	int n = S.getHeight();
 	int m = S.getWidth();
@@ -131,9 +149,9 @@ void Surface3d::generateMesh(Surface& S)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesId);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*indicesStride, indices, GL_STATIC_DRAW);
 
-	indicesCount = indicesStride;
-
 	delete indices;
+
+	indicesCount = indicesStride;
 }
 
 void Surface3d::generate(int width, int depth, float amplitude, int frequency, unsigned int seed) 
@@ -143,7 +161,7 @@ void Surface3d::generate(int width, int depth, float amplitude, int frequency, u
 	Surface S(depth+1, width+1);
 	S.perlinNoise(amplitude, frequency, seed);
 
-	setNormals(S);
+	setNormalsAndGradients(S);
 	generateMesh(S);
 }
 

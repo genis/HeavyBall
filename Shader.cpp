@@ -25,11 +25,13 @@ void Shader::printLog(void)
 	
 	glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &maxLength);
     
-	char infoLog[1000];
+	char* infoLog = new char[maxLength];
     
     glGetProgramInfoLog(programID, maxLength, &infologLength, infoLog);
     
     if (infologLength > 0) printf("%s\n",infoLog);
+
+	delete infoLog;
 }
 
 Shader::Shader(const char* vertexFile, const char* geometryFile,  const char* fragmentFile) 
