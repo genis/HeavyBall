@@ -1,6 +1,7 @@
 #include "Surface3d.h"
 #include "Point.h"
-
+#include <limits>
+#include <iostream>
 
 Surface3d::Surface3d(void)
 {
@@ -10,39 +11,44 @@ Surface3d::~Surface3d(void)
 {
 }
 
-Vector Surface3d::getGradient(float x, float y)
+Vector Surface3d::getNormal(float x, float z)
 {
 	int j = x;
-	int i = y;
+	int i = z;
 
-	return surface[i][j].grad;
-}
-
-Vector Surface3d::getNormal(float x, float y)
-{
-	int j = x;
-	int i = y;
+	if (i < 0 || i >= surface.size() || j < 0 || j >= surface[i].size()) {
+		return Vector(0.0, 0.0, 0.0);
+	}
 
 	return surface[i][j].normal;
 }
 
-float Surface3d::getHeight(float x, float y)
+float Surface3d::getHeight(float x, float z)
 {
 	int j = x;
-	int i = y;
+	int i = z;
 	
-	//plane equation: z = a*x + b*y + c 
-	float a = surface[i][j].grad.x;
-	float b = surface[i][j].grad.y;
-	float c = surface[i][j].height;
+	if (i < 0 || i >= surface.size() || j < 0 || j >= surface[i].size()) { 
+		return -std::numeric_limits<float>::infinity();
+	}
 
-	return (a*x + b*y + c);
+	//plane equation: a*x + b*y + c*z + d = 0 
+	float a = surface[i][j].normal.x;
+	float b = surface[i][j].normal.y;
+	float c = surface[i][j].normal.z;
+	float d = surface[i][j].d;
+
+	return -((a*x + c*z + d) / b);
 }
 
-float Surface3d::getMu(float x, float y)
+float Surface3d::getMu(float x, float z)
 {
 	int j = x;
-	int i = y;
+	int i = z;
+
+	if (i < 0 || i >= surface.size() || j < 0 || j >= surface[i].size()) {
+		return 0;
+	}
 
 	return surface[i][j].mu;
 }
@@ -64,16 +70,10 @@ void Surface3d::setGeometricPropierties(const Surface& S)
 			//normals should face up
 			Vector n = v2.crossProd(v1);
 			n.normalize();
-
 			surface[i][j].normal = n;
 
-			//gradients point downhill
-			surface[i][j].grad = Vector(min(p1.y, p2.y) - max(p1.y, p2.y), 
-										min(p1.y, p3.y) - max(p1.y, p3.y), 
-										0.0f);
-
-			surface[i][j].height = max(max(S.getZ(j, i), S.getZ(j+1, i)), 
-									   max(S.getZ(j, i+1), S.getZ(j+1, i+1)));
+			//d = -a*x_0 - b*y_0 - c*z_0
+			surface[i][j].d = -n.x*p1.x - n.y*p1.y - n.z*p1.z;
 		}
 	}
 }
@@ -182,6 +182,8 @@ void Surface3d::generate(int width, int depth, float amplitude, int frequency, u
 
 void Surface3d::draw(void)
 {
+	glColor3f(0.0f, 1.0f, 0.0f);
+
 	glBindBuffer(GL_ARRAY_BUFFER, verticesId);
     glVertexPointer(3, GL_FLOAT, 0, (GLvoid*) 0);
 

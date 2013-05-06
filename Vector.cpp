@@ -1,5 +1,6 @@
 #include "Vector.h"
 #include <cmath>
+#include <iostream>
 
 Vector::Vector(void)
 {
@@ -63,6 +64,20 @@ Vector& Vector::operator*=(float s)
 	x *= s; 
 	y *= s; 
 	z *= s;
+
+	return (*this);
+}
+
+Vector Vector::operator/(float s) const
+{
+	return Vector(x/s, y/s, z/s);
+}
+
+Vector& Vector::operator/=(float s)
+{
+	x /= s; 
+	y /= s; 
+	z /= s;
 
 	return (*this);
 }

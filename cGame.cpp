@@ -1,6 +1,6 @@
 #include "cGame.h"
 #include "Globals.h"
-
+#include "Vector.h"
 
 cGame::cGame(void) {}
 cGame::~cGame(void){}
@@ -77,8 +77,13 @@ bool cGame::Process()
 	else if (keys['k']) Scene.rotateCam(1.0f, 0.0f, 0.0f);
 	else if (keys['i']) Scene.rotateCam(-1.0f, 0.0f, 0.0f);
 	
-	//if (keys['a'] || keys['d'] || keys['s'] || keys['w']) player.mou(keys);
+	if (keys['a']) Scene.moveSphere(Vector(-1.0f, 0.0f, 0.0f));
+	else if (keys['d']) Scene.moveSphere(Vector(1.0f, 0.0f, 0.0f));
+	if (keys['s']) Scene.moveSphere(Vector (0.0f, 0.0f, -1.0f));
+	else if (keys['w']) Scene.moveSphere(Vector(0.0f, 0.0f, 1.0f));
 
+	if (keys['g']) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else if (keys['h']) glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	return res;
 }
 

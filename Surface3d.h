@@ -10,9 +10,8 @@ class Surface3d
 {
 private:
 	struct propierties {
-		Vector grad;
 		Vector normal;
-		float height;
+		float d;
 		float mu;
 	};
 

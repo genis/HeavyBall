@@ -21,10 +21,13 @@ public:
 	Vector operator*(float s) const;
 	Vector& operator*=(float s);
 
+	Vector operator/(float s) const;
+	Vector& operator/=(float s);
+	
 	void normalize();
 
 	Vector crossProd(const Vector& v) const;
-	float dotProd(const Vector& v) const;
+	float dotProd(const Vector& v) const;	
 };
 
 

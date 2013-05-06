@@ -1,6 +1,7 @@
 #include "cScene.h"
 #include "Globals.h"
 #include <ctime>
+#include <iostream>
 
 cScene::cScene(void) 
 {
@@ -12,7 +13,7 @@ cScene::~cScene(void)
 
 bool cScene::Init()
 {
-	surface.generate(SCENE_WIDTH, SCENE_DEPTH, SCENE_HEIGHT, SCENE_WIDTH/6,time(0));
+	surface.generate(SCENE_WIDTH, SCENE_DEPTH, SCENE_HEIGHT, SCENE_WIDTH/4, time(0));
 	lightingShader = Shader("./shaders/fragmentLighting.vert", NULL, "./shaders/fragmentLighting.frag");
 	lightingShader.printLog();
 	return true;
@@ -40,15 +41,27 @@ void cScene::rotateCam(float rx, float ry, float rz)
 	cam.rotate(rx, ry, rz);
 }
 
+void cScene::moveSphere(Vector t)
+{
+	Point p = s.getPos();
+	p += (t*0.2);
+
+	p.y = surface.getHeight(p.x, p.z);
+	cout << p.y << endl;
+	s.setSphere(p, 0.0, 0.0, 0.0);
+}
+
 void cScene::Draw(cData *Data)
 {
 	setLighting();
 
 	lightingShader.enable();
-
-	glTranslatef(-float(SCENE_WIDTH/2), 0.0f, -float(SCENE_DEPTH/2));
-	glColor3f(0.0f, 1.0f, 0.0f);
-	surface.draw();
+	
+	glPushMatrix();
+		glTranslatef(-float(SCENE_WIDTH/2), 0.0f, -float(SCENE_DEPTH/2));
+		surface.draw();
+		s.draw();
+	glPopMatrix();
 
 	lightingShader.disable();
 }

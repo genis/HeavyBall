@@ -89,8 +89,8 @@ void Surface::perlinNoise(float amplitude, int frequency, unsigned int seed)
 
 			double a = z00 + Sx*(z01-z00);
 			double b = z10 + Sx*(z11-z10);
-
-			surface[i][j] = (a + Sy*(b-a)) * amplitude/2;
+			
+			surface[i][j] = (a + Sy*(b-a)) * (amplitude/2);
 		}
 	}
 }
