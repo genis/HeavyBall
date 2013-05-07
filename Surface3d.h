@@ -12,6 +12,7 @@ private:
 	struct propierties {
 		Vector normal;
 		float d;
+		float theta;
 		float mu;
 	};
 

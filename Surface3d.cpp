@@ -68,12 +68,15 @@ void Surface3d::setGeometricPropierties(const Surface& S)
 			Vector v2 = p3 - p1;
 
 			//normals should face up
-			Vector n = v2.crossProd(v1);
-			n.normalize();
-			surface[i][j].normal = n;
+			Vector normal = v2.crossProd(v1);
+			normal.normalize();
+			surface[i][j].normal = normal;
 
 			//d = -a*x_0 - b*y_0 - c*z_0
-			surface[i][j].d = -n.x*p1.x - n.y*p1.y - n.z*p1.z;
+			surface[i][j].d = -normal.x*p1.x - normal.y*p1.y - normal.z*p1.z;
+
+			Vector u = Vector(normal.x, 0.0, normal.z);
+			surface[i][j].theta = asinf(abs(normal.dotProd(u)) / (normal.lenght() * u.lenght()));
 		}
 	}
 }

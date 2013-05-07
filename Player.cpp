@@ -15,10 +15,10 @@ Player::~Player(void)
 
 void Player::mou(Vector grad, Vector normal, unsigned char keys[256])
 {
-	Vector aux = fisic.acceleracio(grad, normal, keys);
+	/*Vector aux = fisic.acceleracio(grad, normal, keys);
 	posicio.x -= aux.x;
 	posicio.y -= aux.y;
-	posicio.z -= aux.z;
+	posicio.z -= aux.z;*/
 }
 
 void Player::render(cData *Data)

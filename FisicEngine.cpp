@@ -11,49 +11,14 @@ FisicEngine::~FisicEngine(void)
 {
 }
 
-Vector FisicEngine::acceleracio(Vector grad, Vector normal, unsigned char keys[256])
+Vector FisicEngine::acceleracio(Vector normal, float theta, Vector F, float M, float R, float mu)
 {
-	float angle = getAngle(grad, normal); //Obtenim l'angle amb el pla
-	float forceDown = MASSA * GRAVITY * sin(angle); //Calculem la força que fa cap avall
-	grad.normalize(); //Agafem el vector unitari
-	Vector forceButtons(0,0,0);
-	if (keys['s']) {
-		if (keys['a']){
-			forceButtons.x += 15;
-			forceButtons.z += 15;
-		}
-		else if (keys['d']){
-			forceButtons.x -= 15;
-			forceButtons.z += 15;
-		}
-		else 
-			forceButtons.z += 30;
-	}
-	if (keys['w']) {
-		if (keys['a']){
-			forceButtons.x += 15;
-			forceButtons.z -= 15;
-		}
-		else if (keys['d']){
-			forceButtons.x -= 15;
-			forceButtons.z -= 15;
-		}
-		else 
-			forceButtons.z -= 30;
-	}
-	if (keys['a']) forceButtons.x += 15;
-	else if (keys['d']) forceButtons.x -= 15;
-	
-	float finalForce = 0; //Calculem la força resultant de sumarli la que estem fent amb els botons
-	Vector forces(grad.x * forceDown - forceButtons.x, 
-		grad.y * forceDown - forceButtons.y, 
-		grad.z * forceDown - forceButtons.z); //Sumem la força final al vector unitari
-	return forces;
-}
+	//a = (M*GRAVITY * sin(theta)) / M + I/R^2
+	//I =(2*M * R^2) / 5
 
-float FisicEngine::getAngle(Vector grad, Vector normal)
-{
-	float length = sqrt(grad.x*grad.x + grad.y*grad.y + grad.z*grad.z) + 
-		sqrt(normal.x*normal.x + normal.y*normal.y + normal.z*normal.z);
-	return acosf(grad.dotProd(normal)/length);
+	float a = (M*GRAVITY * sin(theta)) / (M + (0.4*M));
+	Vector g = Vector(normal.x, 0.0, normal.z) * a;
+	Vector f = Vector();
+
+	return (g+f);
 }

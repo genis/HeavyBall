@@ -11,8 +11,11 @@ private:
 
 	Vector T;
 
+	float M;
+
 public:
 	Sphere(void);
+	Sphere(float M);
 	~Sphere(void);
 
 	Point getPos();

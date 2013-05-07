@@ -11,7 +11,8 @@ class cScene
 private:
 	static const int SCENE_WIDTH = 100;
 	static const int SCENE_DEPTH = 100;
-	static const int SCENE_HEIGHT = 30;
+	static const int SCENE_HEIGHT = 15;
+	static const int P = 6;
 
 	Surface3d surface;
 
