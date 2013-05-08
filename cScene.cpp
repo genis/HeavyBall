@@ -43,14 +43,13 @@ void cScene::rotateCam(float rx, float ry, float rz)
 
 void cScene::moveSphere(Vector t)
 {
-	Point p = s.getPos();
+	Point p = s.getPosition();
 	p += (t*0.2);
 
 	p.y = surface.getHeight(p.x, p.z);
-	cout << p.y << endl;
 	s.setSphere(p, 0.0, 0.0, 0.0);
-	cam.move(Vector(t));
-	cam.setVrp(p);
+	//cam.move(Vector(t));
+	//cam.setVrp(p);
 
 }
 

@@ -1,6 +1,5 @@
 #include "Vector.h"
 #include <cmath>
-#include <iostream>
 
 Vector::Vector(void)
 {
@@ -22,7 +21,7 @@ Vector::~Vector(void)
 
 float Vector::lenght() 
 {
-	return sqrt(x*x + y*y + z*z);
+	return sqrtf(x*x + y*y + z*z);
 }
 
 Vector Vector::operator+(const Vector& v) const

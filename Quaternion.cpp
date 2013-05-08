@@ -33,12 +33,12 @@ Quaternion::~Quaternion(void)
 
 Quaternion Quaternion::operator*(const Quaternion& q) const
 {
-	 Quaternion nq = Quaternion((w*q.w - x*q.x - y*q.y - z*q.z),
+	 Quaternion rq = Quaternion((w*q.w - x*q.x - y*q.y - z*q.z),
 	 							(w*q.x + x*q.w + y*q.z - z*q.y),
 								(w*q.y - x*q.z + y*q.w + z*q.x),
 								(w*q.z + x*q.y - y*q.x + z*q.w));
-	 nq.normalize();
-	 return nq;
+	 rq.normalize();
+	 return rq;
 }
 
 void Quaternion::matrix(float* r) const
@@ -51,7 +51,7 @@ void Quaternion::matrix(float* r) const
 
 void Quaternion::normalize(void)
 {
-	float lenght = sqrt(w*w + x*x + y*y + z*z);
+	float lenght = sqrtf(w*w + x*x + y*y + z*z);
 
 	w /= lenght;
 	

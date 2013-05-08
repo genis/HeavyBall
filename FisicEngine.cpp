@@ -1,6 +1,7 @@
 #include "FisicEngine.h"
 #include <math.h>
 
+typedef vector<Sphere*>::iterator VSit;
 
 FisicEngine::FisicEngine(void)
 {
@@ -16,8 +17,11 @@ FisicEngine::~FisicEngine(void)
 {
 }
 
-void FisicEngine::procces(void)
+void FisicEngine::process(void)
 {
+	for (VSit it = spheres.begin(); it != spheres.end(); ++it) {
+		
+	}
 }
 
 Vector FisicEngine::acceleracio(Vector normal, float theta, Vector F, float M, float R, float mu)

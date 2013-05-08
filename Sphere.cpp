@@ -3,19 +3,35 @@
 
 Sphere::Sphere(void)
 {
+	radius = 1.0;
 	mass = 0;
+
+	externalForce = Vector(0.0, 0.0, 0.0);
 }
 
-Sphere::Sphere(float mass)
+Sphere::Sphere(float radius,  float mass)
 {
+	this->radius = radius;
 	this->mass = mass;
+
+	externalForce = Vector(0.0, 0.0, 0.0);
 }
 
 Sphere::~Sphere(void)
 {
 }
 
-Point Sphere::getPos()
+float Sphere::getRadius(void)
+{
+	return radius;
+}
+
+float Sphere::getMass(void)
+{
+	return mass;
+}
+
+Point Sphere::getPosition(void)
 {
 	return T;
 }
@@ -27,6 +43,11 @@ void Sphere::setSphere(Point p, float rx, float ry, float rz)
 	phi = rx;
 	theta = ry;
 	psi = rz;
+}
+
+void Sphere::setExternalForce(Vector F) 
+{
+	externalForce = F;
 }
 
 void Sphere::move(Vector t)
@@ -46,7 +67,7 @@ void Sphere::draw(void)
 		glColor3f(1.0, 1.0, 1.0);
 		
 		GLUquadricObj *q = gluNewQuadric();
-		gluSphere(q, 0.5, 16,16);
+		gluSphere(q, radius, 16,16);
 		gluDeleteQuadric(q);
 	glPopMatrix();
 }

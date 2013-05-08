@@ -17,7 +17,7 @@ public:
 	FisicEngine(Surface3d* surface, vector<Sphere*> spheres);
 	~FisicEngine(void);
 
-	void procces(void);
+	void process(void);
 private:
 	Surface3d* surface;
 	vector<Sphere*> spheres;

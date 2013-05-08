@@ -9,13 +9,10 @@ class Player
 public:
 	Player(void);
 	~Player(void);
-	void mou(Vector grad, Vector normal, unsigned char keys[256]);
-	void render(cData *Data);
+	void mou(Vector d);
 
 private:
-	Vector posicio;
-	FisicEngine fisic;
-
-
+	Sphere* sphere;
+	float push;
 };
 
