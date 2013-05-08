@@ -1,4 +1,6 @@
 #pragma once
+#include "Vector.h"
+
 class Quaternion
 {
 	float x;
@@ -10,11 +12,11 @@ class Quaternion
 public:
 	Quaternion(void);
 	Quaternion(float w, float x, float y, float z);
+	Quaternion(float w, Vector axis);
 	~Quaternion(void);
 
 	Quaternion operator*(const Quaternion& q) const;
-	Quaternion& operator*=(const Quaternion& q);
-	
+
 	void matrix(float* r) const;
 
 	void normalize(void);

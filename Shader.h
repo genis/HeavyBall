@@ -6,7 +6,7 @@ using namespace std;
 class Shader
 {
 private:
-	vector<GLuint> program; 
+	//vector<GLuint> program; 
 	GLuint programID; 
 
 	void readShaderSourceFile(const char*, string& source);

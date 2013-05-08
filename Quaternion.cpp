@@ -18,35 +18,35 @@ Quaternion::Quaternion(float w, float x, float y, float z)
 
 	this->w = w;
 }
+
+Quaternion::Quaternion(float w, Vector axis)
+{
+	this->x = axis.x;
+	this->y = axis.y;
+	this->z = axis.z;
+
+	this->w = w;
+}
 Quaternion::~Quaternion(void)
 {
 }
 
 Quaternion Quaternion::operator*(const Quaternion& q) const
 {
-	return Quaternion((w*q.w - x*q.x - y*q.y - z*q.z),
-	 				  (w*q.x + x*q.w + y*q.z - z*q.y),
-					  (w*q.y - x*q.z + y*q.w + z*q.x),
-					  (w*q.z + x*q.y - y*q.x + z*q.w));
-}
-
-Quaternion& Quaternion::operator*=(const Quaternion& q)
-{
-	w = (w*q.w - x*q.x - y*q.y - z*q.z);
-
-	x = (w*q.x + x*q.w + y*q.z - z*q.y);
-	y = (w*q.y - x*q.z + y*q.w + z*q.x);
-	z = (w*q.z + x*q.y - y*q.x + z*q.w);
-
-	return (*this);
+	 Quaternion nq = Quaternion((w*q.w - x*q.x - y*q.y - z*q.z),
+	 							(w*q.x + x*q.w + y*q.z - z*q.y),
+								(w*q.y - x*q.z + y*q.w + z*q.x),
+								(w*q.z + x*q.y - y*q.x + z*q.w));
+	 nq.normalize();
+	 return nq;
 }
 
 void Quaternion::matrix(float* r) const
 {
-	r[0] = 1-2*y*y-2*z*z; r[1] = 2*x*y-2*w*z; r[2] = 2*x*z+2*w*y;  r[3] = 0.0;
-	r[4] = 2*x*y+2*w*z  ; r[5] = 2*x*y-2*w*z; r[6] = 2*x*z+2*w*y;  r[7] = 0.0;
-	r[8] = 1-2*y*y-2*z*z; r[9] = 2*x*y-2*w*z; r[10] = 2*x*z+2*w*y; r[11] = 0.0;
-	r[12] = 0.0;		  r[13] = 0.0;        r[14] = 0.0;         r[15] = 1.0;
+	r[0] = 1-2*y*y-2*z*z; r[1] = 2*x*y-2*z*w;   r[2] = 2*x*z+2*y*w;    r[3] = 0.0;
+	r[4] = 2*x*y+2*z*w;   r[5] = 1-2*x*x-2*z*z; r[6] = 2*y*z-2*x*w;    r[7] = 0.0;
+	r[8] = 2*x*z-2*y*w;   r[9] = 2*y*z+2*x*w;   r[10] = 1-2*x*x-2*y*y; r[11] = 0.0;
+	r[12] = 0.0;		  r[13] = 0.0;          r[14] = 0.0;           r[15] = 1.0;
 }
 
 void Quaternion::normalize(void)

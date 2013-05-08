@@ -37,6 +37,7 @@ void Shader::printLog(void)
 Shader::Shader(const char* vertexFile, const char* geometryFile,  const char* fragmentFile) 
 {
     programID = glCreateProgram();
+	vector<GLuint> program;
 
     if (vertexFile != NULL) {
         string vertexSource;
@@ -88,6 +89,8 @@ Shader::Shader(const char* vertexFile, const char* geometryFile,  const char* fr
     
     glLinkProgram(programID);
     //printLog(programID);
+
+	for (int i = 0; i < program.size(); ++i) glDeleteShader(program[i]);
 }
 
 Shader::~Shader(void)
@@ -106,6 +109,6 @@ void Shader::disable(void)
 
 void Shader::deleteShader(void)
 {
-	for (int i = 0; i < program.size(); ++i) glDeleteShader(program[i]);
+	//for (int i = 0; i < program.size(); ++i) glDeleteShader(program[i]);
 	glDeleteProgram(programID);
 }
