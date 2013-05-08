@@ -27,7 +27,7 @@ void cScene::setLighting()
 
 void cScene::setCam()
 {
-	//gluLookAt(50, 100, -100, 0, 0, 0, 0, 1, 0);
+	//gluLookAt(50, 100, 100, 0, 0, 0, 0, -1, 0);
 	cam.setUp();
 }
 
@@ -49,6 +49,9 @@ void cScene::moveSphere(Vector t)
 	p.y = surface.getHeight(p.x, p.z);
 	cout << p.y << endl;
 	s.setSphere(p, 0.0, 0.0, 0.0);
+	cam.move(Vector(t));
+	cam.setVrp(p);
+
 }
 
 void cScene::Draw(cData *Data)

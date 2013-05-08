@@ -11,11 +11,13 @@ private:
 
 	Vector T;
 
-	float M;
+	float mass;
+
+	float alpha; //angular acceleration.
 
 public:
 	Sphere(void);
-	Sphere(float M);
+	Sphere(float mass);
 	~Sphere(void);
 
 	Point getPos();

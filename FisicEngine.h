@@ -1,5 +1,8 @@
 #pragma once
+#include <vector>
 #include "Vector.h"
+#include "Surface3d.h"
+#include "Sphere.h"
 
 #define GRAVITY		9.8
 //#define RADI		2
@@ -8,9 +11,16 @@
 
 class FisicEngine
 {
+	
 public:
 	FisicEngine(void);
+	FisicEngine(Surface3d* surface, vector<Sphere*> spheres);
 	~FisicEngine(void);
+
+	void procces(void);
+private:
+	Surface3d* surface;
+	vector<Sphere*> spheres;
 
 	Vector acceleracio(Vector normal, float theta, Vector F, float M, float R, float mu);
 	

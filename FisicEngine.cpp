@@ -6,8 +6,17 @@ FisicEngine::FisicEngine(void)
 {
 }
 
+FisicEngine::FisicEngine(Surface3d* surface, vector<Sphere*> spheres)
+{
+	this->surface = surface;
+	this->spheres = spheres;
+}
 
 FisicEngine::~FisicEngine(void)
+{
+}
+
+void FisicEngine::procces(void)
 {
 }
 

@@ -12,15 +12,15 @@ vec3 getDiffuse(vec3 L) {
     return diffuse * max(dot(N, L), 0.0);
 }
 
-vec3 getSpecular(vec3 R) {
+vec3 getSpecular(vec3 R, vec3 V) {
     vec3 specular = (gl_FrontMaterial.specular * gl_LightSource[0].specular).rgb;
-    return specular * pow(max(dot(N, R), 0.0), gl_FrontMaterial.shininess);
+    return specular * pow(max(dot(V, R), 0.0), gl_FrontMaterial.shininess);
 }
 
 void main() {
     vec3 L = normalize(gl_LightSource[0].position.xyz - Vobs);
-    vec3 V = vec3(0.0, 0.0, 1.0);
-    V = normalize(-Vobs);
-    vec3 R = normalize(2.0 * (dot(N, L)) * N - L);
-    gl_FragColor = vec4(getAmbient() + getDiffuse(L) + getSpecular(R), 1.0) * gl_Color;
+    vec3 V = normalize(-Vobs);
+    vec3 R = -reflect(L,N);
+    gl_FragColor = (vec4(getAmbient() + getDiffuse(L), 1.0) * gl_Color);
+	//gl_FragColor = gl_Color;
 }

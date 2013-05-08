@@ -3,6 +3,12 @@
 
 Sphere::Sphere(void)
 {
+	mass = 0;
+}
+
+Sphere::Sphere(float mass)
+{
+	this->mass = mass;
 }
 
 Sphere::~Sphere(void)

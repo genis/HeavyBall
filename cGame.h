@@ -19,7 +19,8 @@ public:
 
 	//Input
 	void ReadKeyboard(unsigned char key, int x, int y, bool press);
-	void ReadMouse(int button, int state, int x, int y);
+	void ReadMouse(int x, int y);
+
 	//Process
 	bool Process();
 	//Output
@@ -30,4 +31,6 @@ private:
 	cScene Scene;
 	cData Data;
 	Player player;
+
+	int dx;
 };

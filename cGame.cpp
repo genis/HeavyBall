@@ -57,8 +57,9 @@ void cGame::ReadKeyboard(unsigned char key, int x, int y, bool press)
 	keys[key] = press;
 }
 
-void cGame::ReadMouse(int button, int state, int x, int y)
+void cGame::ReadMouse(int x, int y)
 {
+	dx = x;
 }
 
 //Process
@@ -84,6 +85,10 @@ bool cGame::Process()
 
 	if (keys['g']) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else if (keys['h']) glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	if (dx > SCREEN_WIDTH - 50) Scene.rotateCam(0.0, 1.0, 0.0);
+	else if (dx < 50) Scene.rotateCam(0.0, -1.0, 0.0);
+
 	return res;
 }
 
