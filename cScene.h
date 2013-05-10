@@ -5,6 +5,7 @@
 #include "Point.h"
 #include "Camera.h"
 #include "Sphere.h"
+#include "Player.h"
 
 class cScene
 {
@@ -18,16 +19,19 @@ private:
 
 	Shader lightingShader;
 
-	Camera cam;
+	vector<Camera> cams;
+	vector<Player> players;
 
 	Point sun;
+	Camera cam;
+
 	Sphere s;
 
 public:
 	cScene(void);
 	virtual ~cScene(void);
 
-	bool Init();
+	bool Init(int numPlayers);
 
 	void setLighting();
 

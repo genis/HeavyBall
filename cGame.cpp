@@ -31,8 +31,9 @@ bool cGame::Init()
 	if(!res) return false;
 	res = Data.LoadImage(IMG_ROOF,"roof.png",GL_RGBA);
 	if(!res) return false;
+
 	glewInit();
-	res = Scene.Init();
+	res = Scene.Init(1);
 	
 	return res;
 }
@@ -41,9 +42,15 @@ bool cGame::Loop()
 {
 	bool res=true;
 
+	int t1, t2;
+	t1 = glutGet(GLUT_ELAPSED_TIME);
+
 	res = Process();
 	if(res) Render();
 
+	do { t2 = glutGet(GLUT_ELAPSED_TIME);
+	} while (t2 - t1 < 10); //el 10 es pot canviar x mes rapid o mes lent
+	
 	return res;
 }
 
@@ -71,10 +78,6 @@ bool cGame::Process()
 	//Process Input
 	if(keys[27])	res=false;	
 	
-	int t1, t2;
-
-	t1 = glutGet(GLUT_ELAPSED_TIME);
-
 	if (keys['q']) Scene.moveCam(0.0f, 0.0f, 1.0f);
 	else if (keys['e']) Scene.moveCam(0.0f, 0.0f, -1.0f);
 
@@ -99,11 +102,9 @@ bool cGame::Process()
 	else if (newY < oldY) Scene.rotateCam(-1.0, 0.0, 0.0);
 	oldY = newY;
 
-	if(newY < 80 || newY > SCREEN_HEIGHT - 80 || newX < 80 || newX > SCREEN_WIDTH - 80) 
+	if(newY < 80 || newY > SCREEN_HEIGHT - 80 || newX < 80 || newX > SCREEN_WIDTH - 80) { 
 		glutWarpPointer(SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
-
-	do { t2 = glutGet(GLUT_ELAPSED_TIME);
-	} while (t2 - t1 < 10); //el 10 es pot canviar x mes rapid o mes lent
+	}
 
 	return res;
 }

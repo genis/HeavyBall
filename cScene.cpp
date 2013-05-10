@@ -11,17 +11,20 @@ cScene::~cScene(void)
 	lightingShader.deleteShader(); 
 }
 
-bool cScene::Init()
+bool cScene::Init(int numPlayers)
 {
 	surface.generate(SCENE_WIDTH, SCENE_DEPTH, SCENE_HEIGHT, SCENE_WIDTH/P, time(0));
+	
+	// load shaders
 	lightingShader = Shader("./shaders/fragmentLighting.vert", NULL, "./shaders/fragmentLighting.frag");
 	lightingShader.printLog();
+
 	return true;
 }
 
 void cScene::setLighting()
 {
-	GLfloat lightPos[4] = {100.0f, 100.0f, 100.0f, 1.0f};
+	GLfloat lightPos[4] = {-100.0f, 100.0f, -100.0f, 1.0f};
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
 }
 
