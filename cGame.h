@@ -32,5 +32,6 @@ private:
 	cData Data;
 	Player player;
 
-	int dx;
+	int oldX, newX;
+	int oldY, newY;
 };

@@ -59,7 +59,8 @@ void cGame::ReadKeyboard(unsigned char key, int x, int y, bool press)
 
 void cGame::ReadMouse(int x, int y)
 {
-	dx = x;
+	newX = x;
+	newY = y;
 }
 
 //Process
@@ -90,9 +91,17 @@ bool cGame::Process()
 	if (keys['g']) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else if (keys['h']) glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	if (dx > SCREEN_WIDTH - 50) Scene.rotateCam(0.0, 1.0, 0.0);
-	else if (dx < 50) Scene.rotateCam(0.0, -1.0, 0.0);
-	
+	if (newX > oldX) Scene.rotateCam(0.0, 1.0, 0.0);
+	else if (newX < oldX) Scene.rotateCam(0.0, -1.0, 0.0);
+	oldX = newX;
+
+	if (newY > oldY) Scene.rotateCam(1.0, 0.0, 0.0);
+	else if (newY < oldY) Scene.rotateCam(-1.0, 0.0, 0.0);
+	oldY = newY;
+
+	if(newY < 80 || newY > SCREEN_HEIGHT - 80 || newX < 80 || newX > SCREEN_WIDTH - 80) 
+		glutWarpPointer(SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+
 	do { t2 = glutGet(GLUT_ELAPSED_TIME);
 	} while (t2 - t1 < 10); //el 10 es pot canviar x mes rapid o mes lent
 
@@ -104,8 +113,6 @@ void cGame::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	
-//	player.render(&Data);
 
 	Scene.setCam();
 	Scene.Draw(&Data);
