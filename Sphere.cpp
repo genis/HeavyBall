@@ -36,6 +36,16 @@ Point Sphere::getPosition(void)
 	return T;
 }
 
+Vector Sphere::getExternalForce(void)
+{
+	return externalForce;
+}
+
+Vector Sphere::getVelocity(void)
+{
+	return V;
+}
+
 void Sphere::setSphere(Point p, float rx, float ry, float rz) 
 {
 	T = p;
@@ -48,6 +58,11 @@ void Sphere::setSphere(Point p, float rx, float ry, float rz)
 void Sphere::setExternalForce(Vector F) 
 {
 	externalForce = F;
+}
+
+void Sphere::setVelocity(Vector v)
+{
+	V = v;
 }
 
 void Sphere::move(Vector t)

@@ -16,6 +16,7 @@ private:
 	float psi;
 
 	Vector T;
+	Vector V; //velocitat
 
 	//float alpha; //angular acceleration.
 	Quaternion alpha; //angular acceleration.
@@ -29,9 +30,12 @@ public:
 
 	float getMass(void);
 	float getRadius(void);
+	Vector getExternalForce(void);
+	Vector getVelocity(void);
 
 	void setSphere(Point p, float rx, float ry, float rz);
 	void setExternalForce(Vector F);
+	void setVelocity(Vector v);
 
 	void move(Vector t);
 	void rotate(float r);

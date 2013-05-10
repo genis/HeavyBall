@@ -36,10 +36,11 @@ public:
 	Surface3d(void);
 	~Surface3d(void);
 
-	Vector getGradient(float x, float y);
-	Vector getNormal(float x, float y);
-	float getHeight(float x, float y);
-	float getMu(float x, float y);
+	Vector getGradient(float x, float z);
+	Vector getNormal(float x, float z);
+	float getHeight(float x, float z);
+	float getMu(float x, float z);
+	float getTheta(float x, float z);
 
 	void generate(int width, int depth, float amplitude, int frequency, unsigned int seed);
 	void draw(void);

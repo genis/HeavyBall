@@ -22,7 +22,7 @@ private:
 	Surface3d* surface;
 	vector<Sphere*> spheres;
 
-	Vector acceleracio(Vector normal, float theta, Vector F, float M, float R, float mu);
+	Vector acceleracio(float M, float R, Vector position, Vector externalForce);
 	
 };
 

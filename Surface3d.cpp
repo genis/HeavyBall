@@ -53,6 +53,18 @@ float Surface3d::getMu(float x, float z)
 	return surface[i][j].mu;
 }
 
+float Surface3d::getTheta(float x, float z)
+{
+	int j = x;
+	int i = z;
+
+	if (i < 0 || i >= surface.size() || j < 0 || j >= surface[i].size()) {
+		return 0;
+	}
+
+	return surface[i][j].theta;
+}
+
 void Surface3d::setGeometricPropierties(const Surface& S)
 {
 	int n = S.getHeight();
