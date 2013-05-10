@@ -70,6 +70,10 @@ bool cGame::Process()
 	//Process Input
 	if(keys[27])	res=false;	
 	
+	int t1, t2;
+
+	t1 = glutGet(GLUT_ELAPSED_TIME);
+
 	if (keys['q']) Scene.moveCam(0.0f, 0.0f, 1.0f);
 	else if (keys['e']) Scene.moveCam(0.0f, 0.0f, -1.0f);
 
@@ -88,6 +92,9 @@ bool cGame::Process()
 
 	if (dx > SCREEN_WIDTH - 50) Scene.rotateCam(0.0, 1.0, 0.0);
 	else if (dx < 50) Scene.rotateCam(0.0, -1.0, 0.0);
+	
+	do { t2 = glutGet(GLUT_ELAPSED_TIME);
+	} while (t2 - t1 < 10); //el 10 es pot canviar x mes rapid o mes lent
 
 	return res;
 }
@@ -98,7 +105,7 @@ void cGame::Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	
-	player.render(&Data);
+//	player.render(&Data);
 
 	Scene.setCam();
 	Scene.Draw(&Data);
