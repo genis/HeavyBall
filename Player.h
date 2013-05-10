@@ -3,6 +3,7 @@
 #include "Surface3d.h"
 #include "FisicEngine.h"
 #include "cData.h"
+#include "Camera.h"
 
 class Player
 {
@@ -13,6 +14,8 @@ public:
 
 private:
 	Sphere* sphere;
+	Camera* cam;
+
 	float push;
 };
 
