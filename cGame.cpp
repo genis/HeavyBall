@@ -13,7 +13,7 @@ bool cGame::Init()
 	glClearColor(0.4f,0.6f,1.0f,0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(45.0,(float)SCREEN_WIDTH/(float)SCREEN_HEIGHT,0.1,2000);
+	gluPerspective(45.0,(float)SCREEN_WIDTH/(float)SCREEN_HEIGHT,0.1,200);
 	glMatrixMode(GL_MODELVIEW);
 	
 	glEnable(GL_DEPTH_TEST);

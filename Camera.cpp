@@ -50,3 +50,18 @@ void Camera::rotate(float rx, float ry, float rz)
 	theta += ry;
 	psi += rz;
 }
+
+void Camera::enable(void)
+{
+	enabled = true;
+}
+
+void Camera::disable(void)
+{
+	enabled = false;
+}
+
+bool Camera::isEnabled(void)
+{
+	return enabled;
+}

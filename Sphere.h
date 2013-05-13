@@ -1,9 +1,10 @@
 #pragma once
 #include "Vector.h"
 #include "Point.h"
+#include "Object.h"
 #include "Quaternion.h"
 
-class Sphere
+class Sphere : public Object
 {
 private:
 	float mass;
@@ -39,6 +40,9 @@ public:
 
 	void move(Vector t);
 	void rotate(float r);
+
+	bool collides(const Object& o) const;
+	bool collidesPoint(const Point& p) const;
 
 	void draw();
 };

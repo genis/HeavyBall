@@ -86,3 +86,13 @@ void Sphere::draw(void)
 		gluDeleteQuadric(q);
 	glPopMatrix();
 }
+
+bool Sphere::collides(const Object& o) const
+{
+	return false;
+}
+
+bool Sphere::collidesPoint(const Point& p) const
+{
+	return false;
+}

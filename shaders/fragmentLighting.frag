@@ -18,9 +18,15 @@ vec3 getSpecular(vec3 R, vec3 V) {
 }
 
 void main() {
-    vec3 L = normalize(gl_LightSource[0].position.xyz - Vobs);
+
     vec3 V = normalize(-Vobs);
-    vec3 R = -reflect(L,N);
-    gl_FragColor = (vec4(getAmbient() + getDiffuse(L), 1.0) * gl_Color);
-	//gl_FragColor = gl_Color;
+	
+	if (dot(V,N) < 0.1) {
+		gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+	}
+	else {
+		vec3 L = normalize(gl_LightSource[0].position.xyz - Vobs);
+		vec3 R = reflect(-L,N);
+		gl_FragColor = (vec4(getAmbient() + getDiffuse(L), 1.0) * gl_Color);
+	}
 }

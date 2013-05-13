@@ -16,6 +16,7 @@ private:
 
 	Quaternion rotation;
 
+	bool enabled;
 public:
 	Camera(void);
 	Camera(Point pos, Point vrp, float rx, float ry, float rz);
@@ -31,5 +32,9 @@ public:
 
 	void set(Point vrp, Point pos);
 
+	void enable(void);
+	void disable(void);
+
+	bool isEnabled(void);
 };
 

@@ -80,6 +80,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BCylinder.h" />
+    <ClInclude Include="Boundary.h" />
+    <ClInclude Include="BBox.h" />
+    <ClInclude Include="BSphere.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="cData.h" />
     <ClInclude Include="cGame.h" />
@@ -87,27 +91,43 @@
     <ClInclude Include="cScene.h" />
     <ClInclude Include="cTexture.h" />
     <ClInclude Include="FisicEngine.h" />
+    <ClInclude Include="Flag.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="PowerUp.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Surface3d.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BCylinder.cpp" />
+    <ClCompile Include="Boundary.cpp" />
+    <ClCompile Include="BBox.cpp" />
+    <ClCompile Include="BSphere.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="cData.cpp" />
     <ClCompile Include="cGame.cpp" />
     <ClCompile Include="cScene.cpp" />
     <ClCompile Include="cTexture.cpp" />
     <ClCompile Include="FisicEngine.cpp" />
+    <ClCompile Include="Flag.cpp" />
     <ClCompile Include="GLUTMain.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="Surface3d.cpp" />

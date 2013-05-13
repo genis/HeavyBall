@@ -18,13 +18,15 @@ public:
 private:
 
 	enum PowerUpType {SPEED, TELE, POWERUP_COUNT}; 
-
+	
 	Sphere* sphere;
 	Camera* cam;
 
 	PowerUpType powerUp;
 
 	float push;
+
+	int team;
 
 };
 

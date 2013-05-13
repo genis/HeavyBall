@@ -19,14 +19,23 @@ Quaternion::Quaternion(float w, float x, float y, float z)
 	this->w = w;
 }
 
-Quaternion::Quaternion(float w, Vector axis)
+Quaternion::Quaternion(float w, const Vector& axis)
 {
-	this->x = axis.x;
-	this->y = axis.y;
-	this->z = axis.z;
+	x = axis.x;
+	y = axis.y;
+	z = axis.z;
 
-	this->w = w;
+	w = w;
 }
+Quaternion::Quaternion(float phi, float theta, float psi)
+{
+	x = 0.0;
+	y = 0.0;
+	z = 0.0;
+
+	w = 1.0;
+}
+
 Quaternion::~Quaternion(void)
 {
 }
@@ -39,6 +48,14 @@ Quaternion Quaternion::operator*(const Quaternion& q) const
 								(w*q.z + x*q.y - y*q.x + z*q.w));
 	 rq.normalize();
 	 return rq;
+}
+
+Quaternion& Quaternion::operator*=(const Quaternion& q)
+{
+	 Quaternion rq = (*this)*q;
+	 (*this) = rq;
+
+	 return (*this);
 }
 
 void Quaternion::matrix(float* r) const
