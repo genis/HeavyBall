@@ -38,6 +38,8 @@ bool cScene::Init(int numPlayers)
 		cams.push_back(new Camera());
 	}
 	
+	spheres[0]->setSphere(Point(50,0,50), 0, 0, 0);
+
 	flags = list<Flag*>();
 	powerUps = list<PowerUp*>();
 
@@ -71,11 +73,12 @@ void cScene::rotateCam(float rx, float ry, float rz)
 
 void cScene::moveSphere(Vector t)
 {
-	Point p = spheres[0]->getPosition();
+	/*Point p = spheres[0]->getPosition();
 	p += (t*0.2);
 
-	p.y = surface.getHeight(p.x, p.z);
-	spheres[0]->setSphere(p, 0.0, 0.0, 0.0);
+	p.y = surface.getHeight(p.x, p.z);*/
+	spheres[0]->setExternalForce(t);
+	cout << "Forces: " << t.x << " " << t.y << " " << t.z << endl;
 	//cam.move(Vector(t));
 	//cam.setVrp(p);
 
@@ -83,7 +86,7 @@ void cScene::moveSphere(Vector t)
 
 void cScene::process(void)
 {
-
+	phisicsEngine.process();
 
 }
 

@@ -88,7 +88,7 @@ void Surface3d::setGeometricPropierties(const Surface& S)
 			surface[i][j].d = -normal.x*p1.x - normal.y*p1.y - normal.z*p1.z;
 
 			Vector u = Vector(normal.x, 0.0, normal.z);
-			surface[i][j].theta = asinf(abs(normal.dotProd(u)) / (normal.lenght() * u.lenght()));
+			surface[i][j].theta = acosf(abs(normal.dotProd(u)) / (normal.lenght() * u.lenght()));
 		}
 	}
 }

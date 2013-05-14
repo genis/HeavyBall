@@ -4,7 +4,7 @@
 Sphere::Sphere(void)
 {
 	radius = 1.0;
-	mass = 0;
+	mass = 2;
 
 	externalForce = Vector(0.0, 0.0, 0.0);
 }

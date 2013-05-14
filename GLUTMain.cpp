@@ -53,7 +53,7 @@ void main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_RGBA | GLUT_ALPHA | GLUT_DOUBLE);
 
 	//Create centered window
-/*	res_x = glutGet(GLUT_SCREEN_WIDTH);
+	res_x = glutGet(GLUT_SCREEN_WIDTH);
 	res_y = glutGet(GLUT_SCREEN_HEIGHT);
 	pos_x = (res_x>>1)-(SCREEN_WIDTH>>1);
 	pos_y = (res_y>>1)-(SCREEN_HEIGHT>>1);
@@ -61,9 +61,9 @@ void main(int argc, char** argv)
 	glutInitWindowPosition(pos_x,pos_y);
 	glutInitWindowSize(SCREEN_WIDTH,SCREEN_HEIGHT);
 	glutCreateWindow("My Awesome 3D Game!");
-	*/
-	glutGameModeString("GLUT_SCREEN_WIDTHxGLUT_SCREEN_HEIGHT:32");
-	glutEnterGameMode();
+	
+	/*glutGameModeString("GLUT_SCREEN_WIDTHxGLUT_SCREEN_HEIGHT:32");
+	glutEnterGameMode();*/
 
 	//Make the default cursor disappear
 	glutSetCursor(GLUT_CURSOR_NONE);

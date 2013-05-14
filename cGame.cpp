@@ -34,6 +34,8 @@ bool cGame::Init()
 
 	glewInit();
 	res = Scene.Init(1);
+
+	start = false;
 	
 	return res;
 }
@@ -62,6 +64,7 @@ void cGame::Finalize()
 void cGame::ReadKeyboard(unsigned char key, int x, int y, bool press)
 {
 	keys[key] = press;
+	if((keys['a'] || keys['s'] || keys['d'] || keys['w']) && !start) start = true;
 }
 
 void cGame::ReadMouse(int x, int y)
@@ -86,10 +89,12 @@ bool cGame::Process()
 	else if (keys['k']) Scene.rotateCam(1.0f, 0.0f, 0.0f);
 	else if (keys['i']) Scene.rotateCam(-1.0f, 0.0f, 0.0f);
 	
-	if (keys['a']) Scene.moveSphere(Vector(-1.0f, 0.0f, 0.0f));
-	else if (keys['d']) Scene.moveSphere(Vector(1.0f, 0.0f, 0.0f));
-	if (keys['s']) Scene.moveSphere(Vector (0.0f, 0.0f, -1.0f));
-	else if (keys['w']) Scene.moveSphere(Vector(0.0f, 0.0f, 1.0f));
+	Vector aux(0.0f, 0.0f, 0.0f);
+	if (keys['s']) aux += Vector(0.0f, 0.0f, -0.2f);
+	else if (keys['w']) aux += Vector(0.0f, 0.0f, 0.2f);
+	if (keys['a']) aux += Vector(0.2f, 0.0f, 0.0f);
+	else if (keys['d']) aux += Vector(-0.2f, 0.0f, 0.0f);
+
 
 	if (keys['g']) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else if (keys['h']) glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -106,6 +111,10 @@ bool cGame::Process()
 		glutWarpPointer(SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
 	}
 
+	if(keys['a'] || keys['s'] || keys['d'] || keys['w']){
+	Scene.moveSphere(aux);
+	Scene.process();
+	}
 	return res;
 }
 

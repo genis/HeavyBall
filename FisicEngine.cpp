@@ -1,5 +1,7 @@
 #include "FisicEngine.h"
 #include <math.h>
+#include <iostream>
+using namespace std;
 
 typedef vector<Sphere*>::iterator VSit;
 typedef	list<Flag*>::iterator LFit;
@@ -27,6 +29,7 @@ void FisicEngine::calculatePhisics(void)
 {
 	for (VSit it = spheres->begin(); it != spheres->end(); ++it) {
 		Vector aux = acceleracio((*it)->getMass(), (*it)->getRadius(), (*it)->getPosition(), (*it)->getExternalForce());
+		cout << "Acceleracio: " << aux.x << " " << aux.y << " " << aux.z << endl;
 		Vector newVel = (*it)->getVelocity() + aux; //calculem la nova velocitat a partir de l'anterior i l'acceleracio
 		(*it)->setVelocity(newVel); //guardem la nova velocitat
 		(*it)->move(newVel); //Movem l'esfera amb la nova velocitat
@@ -82,6 +85,7 @@ Vector FisicEngine::acceleracio(float M, float R, Vector position, Vector extern
 	Vector normal = surface->getNormal(position.x, position.z);
 
 	float a = (M*GRAVITY * sin(surface->getTheta(position.x, position.z))) / (M + (0.4*M));
+
 	Vector g = Vector(normal.x, 0.0, normal.z) * a;
 	externalForce /= M;
 

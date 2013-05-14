@@ -34,4 +34,5 @@ private:
 
 	int oldX, newX;
 	int oldY, newY;
+	boolean start;
 };
